@@ -2,6 +2,9 @@ import { Suspense } from "react";
 import CabinList from "@/app/_components/CabinList";
 import Spinner from "@/app/_components/Spinner";
 
+// the ISR component , because some informations of the cabin maybe cahnge after one houre
+// export const revalidate = 3600;
+
 export const metadata = {
   title: "Cabins",
 };
