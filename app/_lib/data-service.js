@@ -13,7 +13,7 @@ export async function getCabin(id) {
     .single();
 
   //For testing
-  // await new Promise((res) => setTimeout(res, 1000));
+  // await new Promise((res) => setTimeout(res, 2000));
 
   if (error) {
     console.error(error);
@@ -101,15 +101,17 @@ export async function getBookedDatesByCabinId(cabinId) {
   today.setUTCHours(0, 0, 0, 0);
   today = today.toISOString();
 
-  // Getting all bookings
+  // let { data, error } = await supabase.from("bookings").select("");
+  //Getting bookings by cabin id
   const { data, error } = await supabase
     .from("bookings")
     .select("*")
-    .eq("cabinId", cabinId)
-    .or(`startDate.gte.${today},status.eq.checked-in`);
+    .eq("cabinId", cabinId);
+  // the above filter is for see the future resarve date and also the status of the reserve equal to checked-in and mabe it is create some problems to fetch bookings by cabinId
+  // .or(`startDate.gte.${today},status.eq.checked-in`);
 
   if (error) {
-    console.error(error);
+    console.log(error);
     throw new Error("Bookings could not get loaded");
   }
 
@@ -128,6 +130,8 @@ export async function getBookedDatesByCabinId(cabinId) {
 
 export async function getSettings() {
   const { data, error } = await supabase.from("settings").select("*").single();
+
+  // await new Promise((res) => setTimeout(res, 5000));
 
   if (error) {
     console.error(error);
