@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { updateProfileAction } from "../_lib/actions";
+import { useFormStatus } from "react-dom";
 
 function UpdateProfileForm({ guest, children }) {
   const [count, setCount] = useState(0);
@@ -57,11 +58,24 @@ function UpdateProfileForm({ guest, children }) {
       </div>
 
       <div className="flex justify-end items-center gap-6">
-        <button className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300">
-          Update profile
-        </button>
+        {/* only in the component inside the form we can use useFormStatus */}
+        <Button />
       </div>
     </form>
+  );
+}
+
+function Button() {
+  // this component must be client component because useFormStatus is the react-dom hook
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300"
+      disabled={pending}
+    >
+      {pending ? "Updating..." : "Update profile"}
+    </button>
   );
 }
 
