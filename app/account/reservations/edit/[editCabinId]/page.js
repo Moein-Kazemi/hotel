@@ -1,7 +1,16 @@
-export default function Page() {
-  // CHANGE
-  const reservationId = 23;
-  const maxCapacity = 23;
+import UpdateReservationButton from "@/app/_components/UpdateReservationButton";
+import { updateReservation } from "@/app/_lib/actions";
+import { getBooking, getCabin } from "@/app/_lib/data-service";
+
+export default async function Page({ params }) {
+  const editBooking = await getBooking(params.editCabinId);
+  const reservationId = editBooking.id;
+
+  const editCabin = await getCabin(editBooking.cabinId);
+  const maxCapacity = editCabin.maxCapacity;
+
+  // console.log("reservationId: ", reservationId);
+  // console.log("maxCopacity: ", maxCapacity);
 
   return (
     <div>
@@ -9,7 +18,10 @@ export default function Page() {
         Edit Reservation #{reservationId}
       </h2>
 
-      <form className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col">
+      <form
+        action={updateReservation}
+        className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col"
+      >
         <div className="space-y-2">
           <label htmlFor="numGuests">How many guests?</label>
           <select
@@ -39,11 +51,8 @@ export default function Page() {
           />
         </div>
 
-        <div className="flex justify-end items-center gap-6">
-          <button className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300">
-            Update reservation
-          </button>
-        </div>
+        <input type="text" name="bookingId" hidden value={reservationId} />
+        <UpdateReservationButton />
       </form>
     </div>
   );

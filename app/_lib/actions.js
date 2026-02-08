@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { auth, signIn, signOut } from "./auth";
 import { supabase } from "./supabase";
 import { getBookings } from "./data-service";
+import { redirect } from "next/navigation";
 
 export async function signInAction() {
   // when the signIn becomes true go ro redirectTo:
@@ -62,4 +63,39 @@ export async function deleteReservation(bookingId) {
   }
 
   revalidatePath("/account/reservations");
+}
+
+export async function updateReservation(formData) {
+  // 1) authantications
+  const session = await auth();
+  if (!session) throw new Error("You must to logged in first !");
+
+  // 2) authorizations
+  const guestBookings = await getBookings(session.user.guestId);
+  const guestBookingsIds = guestBookings.map((booking) => booking.id);
+  console.log("guestBookingsIds: ", guestBookingsIds);
+
+  const bookingId = Number(formData.get("bookingId"));
+
+  if (!guestBookingsIds.includes(bookingId))
+    throw new Error("You can only update your own reservations");
+
+  const updatedFields = {
+    numGuests: Number(formData.get("numGuests")),
+    observations: formData.get("observations"),
+  };
+
+  const { error } = await supabase
+    .from("bookings")
+    .update(updatedFields)
+    .eq("id", bookingId)
+    .select()
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Booking could not be updated");
+  }
+  revalidatePath("/account/reservations");
+  redirect("/account/reservations");
 }
