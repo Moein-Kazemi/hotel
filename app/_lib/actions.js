@@ -42,6 +42,38 @@ export async function updateProfileAction(formData) {
   revalidatePath("/account/profile");
 }
 
+export async function createBooking(bookingData, formData) {
+  const session = await auth();
+  if (!session) throw new Error("You must to logged in first !");
+
+  const { startData, endDate, numNight, cabinPrice, cabinId } = bookingData;
+
+  const newBooking = {
+    startData,
+    endDate,
+    numNight,
+    numGuests: Number(formData.get("numGuests")),
+    cabinPrice,
+    extrasPrice: 0.0,
+    totalPrice: bookingData.cabinPrice,
+    status: "unconfirmed",
+    hasBreakfast: false,
+    isPaid: false,
+    observations: formData.get("observations").slice(0, 1000),
+    cabinId,
+    guestId: session.user.guestId,
+  };
+
+  const { data, error } = await supabase.from("bookings").insert([newBooking]);
+
+  if (error) {
+    throw new Error("Booking could not be created");
+  }
+
+  revalidatePath(`/cabins/${bookingData.cabinId}`);
+  redirect("/cabins/thankyou");
+}
+
 export async function deleteReservation(bookingId) {
   const session = await auth();
   if (!session) throw new Error("You must to logged in first !");
