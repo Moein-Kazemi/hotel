@@ -1,6 +1,7 @@
 import Image from "next/image";
 import image1 from "@/public/about-1.jpg";
 import { getCabins } from "../_lib/data-service";
+import Link from "next/link";
 
 export const revalidate = 86400;
 
@@ -14,9 +15,9 @@ export default async function Page() {
 
   return (
     <div className="grid grid-cols-5 gap-x-24 gap-y-32 text-lg items-center">
-      <div className="col-span-3">
+      <div className="col-span-5 sm:col-span-3">
         <h1 className="text-4xl mb-10 text-accent-400 font-medium">
-          Welcome to The Wild Oasis
+          Welcome to The Hotel
         </h1>
 
         <div className="space-y-8">
@@ -42,14 +43,14 @@ export default async function Page() {
         </div>
       </div>
 
-      <div className="col-span-2">
+      <div className="col-span-5 sm-col-span-2">
         <Image
           src={image1}
           alt="Family sitting around a fire pit in front of cabin"
         />
       </div>
 
-      <div className=" relative col-span-2 aspect-square">
+      <div className=" relative col-span-5 sm:col-span-2 aspect-square">
         <Image
           fill
           src="/about-2.jpg"
@@ -57,10 +58,10 @@ export default async function Page() {
         />
       </div>
 
-      <div className="col-span-3">
-        <h1 className="text-4xl mb-10 text-accent-400 font-medium">
-          Managed by our family since 1962
-        </h1>
+      <div className="col-span-5 sm:col-span-2">
+        <h2 className="text-3xl mb-10 text-accent-400 font-medium">
+          Managed by Our Family
+        </h2>
 
         <div className="space-y-8">
           <p>
@@ -78,13 +79,13 @@ export default async function Page() {
             is like coming home.
           </p>
 
-          <div>
-            <a
+          <div className="flex justify-center">
+            <Link
               href="/cabins"
               className="inline-block mt-4 bg-accent-500 px-8 py-5 text-primary-800 text-lg font-semibold hover:bg-accent-600 transition-all"
             >
               Explore our luxury cabins
-            </a>
+            </Link>
           </div>
         </div>
       </div>

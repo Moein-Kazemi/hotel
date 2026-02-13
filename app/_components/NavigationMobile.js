@@ -7,9 +7,9 @@ function NavigationMobile({ session }) {
 
   if (isOpen)
     return (
-      <div className="fixed inset-0 flex flex-col gap-4 bg-stone-400 z-10 w-full h-full">
+      <div className="fixed inset-0 flex flex-col gap-4 bg-stone-400 z-10 w-full h-full px-8 py-5">
         <div
-          className="flex justify-end cursor-pointer p-6"
+          className="flex justify-end cursor-pointer "
           onClick={toggleIsOpen}
         >
           <svg
