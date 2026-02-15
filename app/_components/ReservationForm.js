@@ -78,11 +78,11 @@ function ReservationForm({ cabin, user }) {
             name="observations"
             id="observations"
             className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
-            placeholder="Any pets, allergies, special requirements, etc.?"
+            placeholder="Any pets, allergies"
           />
         </div>
 
-        <div className="flex justify-end items-center gap-6">
+        <div className="flex flex-col sm:flex-row justify-end items-center gap-6">
           <p className="text-primary-300 text-base">Start by selecting dates</p>
 
           <button className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300">

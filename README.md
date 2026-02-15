@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Hotel
 
-## Getting Started
+reservation a cabin in the hotel
 
-First, run the development server:
+## Description
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This application allows users to book hotel cabins for specific dates, edit or delete their bookings, and manage their profiles. **Authentication** uses Google OAuth via NextAuth. Data is stored in Supabase (**Postgres**).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![alt text](./public/sample-project-1.jpg)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Sign in with Google (OAuth)
+- User profile management (nationality, national Id)
+- View available cabins and booking calendar
+- Create, edit, and delete bookings
+- Date conflict checks to prevent overlapping bookings
+- Responsive UI built with Tailwind CSS
 
-## Learn More
+## Teck Stack
 
-To learn more about Next.js, take a look at the following resources:
+- Next.js (App Router)
+- React
+- Supabase (Auth, Database, Storage)
+- PostgreSQL (via Supabase)
+- Tailwind CSS
+- Vercel (recommended) or other hosting providers
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Quick Start (Local)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Clone the repository :
 
-## Deploy on Vercel
+   `git clone https://github.com/Moein-Kazemi/hotel `
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Change directory :
+   `cd <project-folder>`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. Install dependencies :
+   `npm install`
+
+4. Create a `.env.local` file (see Environment Variables below)
+
+5. Run the development server:
+   `npm run dev`
+6. Open
+   `http://localhost:3000`
+
+after that you have to create a project in the Supabase and connect to your project in local machine
+
+## Environment Variables
+
+Example `.env.local` (do NOT commit secrets):
+
+- SUPABASE_URL=`<your-supabase-url>`
+- SUPABASE_KEY=`<your-supabase-anon-key>`
+- NEXTAUTH_URL=`http://localhost:3000`
+- NEXTAUTH_SECRET=`secret_key`
+
+Security notes:
+
+Never expose **SUPABASE_KEY** and **SUPABASE_URL** to the client.
+Use **NEXT_PUBLIC** prefix only for values safe in the browser.
+
+## Contributing
+
+- Open issues for bugs or feature requests.
+- Fork the repository, create a feature branch, run tests and linters, then open a pull request.
+- Add or update documentation when changing APIs or database schemas.
+
+## Status
+
+project is online in the:
+[reservationhotel](https://reservationhotel.vercel.app/)
