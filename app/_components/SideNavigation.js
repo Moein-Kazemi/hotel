@@ -13,7 +13,7 @@ const navLinks = [
   {
     name: "Home",
     href: "/account",
-    icon: <HomeIcon className="h-5 w-5 text-primary-600" />,
+    icon: <HomeIcon className="h-5 w-5 text-primary-600 " />,
   },
   {
     name: "Reservations",
@@ -31,8 +31,8 @@ function SideNavigation() {
   const pathName = usePathname();
 
   return (
-    <nav className="border-r border-primary-900">
-      <ul className="flex flex-col gap-2 h-full text-lg">
+    <nav className="hidden sm:block border-r border-primary-900">
+      <ul className="flex flex-col gap-2 h-full text-lg ">
         {navLinks.map((link) => (
           <li key={link.name}>
             <Link
@@ -42,13 +42,17 @@ function SideNavigation() {
               href={link.href}
             >
               {link.icon}
-              <span>{link.name}</span>
+              <span className="hidden sm:block">{link.name}</span>
             </Link>
           </li>
         ))}
 
         <li className="mt-auto">
-          <SignOutButton />
+          <SignOutButton>
+            <span className="hidden sm:block text-primary-200">
+              Sign out
+            </span>{" "}
+          </SignOutButton>
         </li>
       </ul>
     </nav>

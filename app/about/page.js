@@ -14,7 +14,7 @@ export default async function Page() {
   const cabislength = cabins.length;
 
   return (
-    <div className="grid grid-cols-5 gap-x-24 gap-y-32 text-lg items-center">
+    <div className="grid grid-cols-5 gap-x-19 gap-y-32 text-lg items-center">
       <div className="col-span-5 sm:col-span-3">
         <h1 className="text-4xl mb-10 text-accent-400 font-medium">
           Welcome to The Hotel
