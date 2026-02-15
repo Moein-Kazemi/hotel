@@ -7,14 +7,14 @@ function NavigationMobile({ session }) {
 
   if (isOpen)
     return (
-      <div className="fixed inset-0 flex flex-col gap-4 bg-stone-400 z-10 w-full h-full px-8 py-5">
+      <div className="fixed inset-0 flex flex-col gap-4 bg-stone-400 z-10 w-full h-full px-9 py-6">
         <div
           className="flex justify-end cursor-pointer "
           onClick={toggleIsOpen}
         >
           <svg
-            width="33"
-            height="33"
+            width="40"
+            height="40"
             viewBox="0 0 33 33"
             fill="none"
             className="text-primary-100 hover:text-accent-400"
