@@ -12,19 +12,20 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export async function generateStaticParams() {
-  const cabins = await getCabins();
+// export async function generateStaticParams() {
+//   const cabins = await getCabins();
 
-  const ids = cabins.map((cabin) => {
-    cabinId: cabin.id;
-  });
-  return ids;
-}
+//   const ids = cabins.map((cabin) => {
+//     cabinId: cabin.id;
+//   });
+//   return ids;
+// }
 
 export default async function Page({ params }) {
-  const cabin = await getCabin(params.cabinId);
+  const cabin = await getCabin(Number(params.cabinId));
   const { id, name, maxCapacity, regularPrice, discount, image, description } =
     cabin;
+  console.log(cabin);
 
   // const setting = await getSettings();
   // const bookedDate = await getBookedDatesByCabinId(params.cabindID);

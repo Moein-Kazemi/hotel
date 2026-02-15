@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "./app/_lib/auth";
 
 // export function middleware(request) {
-//   console.log(request);
+//
 
 //   // for rediredct to another page
 //   return NextResponse.redirect(new URL("/about", request.url));
